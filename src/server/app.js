@@ -8,7 +8,7 @@ const gamesRouter = require("./routes/games");
 app.use(express.json());
 app.use("/games", gamesRouter);
 
-const PORT = process.env.SERVER_PORT || 3001;
+const PORT = 3001;
 
 app.listen(PORT, async () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
