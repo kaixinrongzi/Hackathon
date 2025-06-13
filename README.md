@@ -41,7 +41,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
     npm install
     ```
 2. Start the Server
-    ```
+    ```bash
     # start backend only
     npm run dev_backend
 
@@ -52,9 +52,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 3. Send request to server
     - Send using Postman
     - Send using ```curl```
-        ```
+        ```bash
         # Example
-        curl.exe -X POST http://localhost:3000/games/insert
+        curl.exe -X POST http://localhost:3001/games/insert
         ```
     Request that server accept:
     - insert: insert all data in games_data_1_sample.json.json file into MongoDB
