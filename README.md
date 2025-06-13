@@ -34,3 +34,30 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Running the Server (Backend)
+1. Ensure you have all necessary the packages
+    ```
+    npm install
+    ```
+2. Start the Server
+    ```
+    # start backend only
+    npm run dev_backend
+
+    # start both front and backend
+    npm run dev
+    ```
+    The Server will be running on ```port 3001```
+3. Send request to server
+    - Send using Postman
+    - Send using ```curl```
+        ```
+        # Example
+        curl.exe -X POST http://localhost:3000/games/insert
+        ```
+    Request that server accept:
+    - insert: insert all data in games_data_1_sample.json.json file into MongoDB
+    - query (TODO): vector search of related games base on user query from front end and return the search result to front end
+    
+

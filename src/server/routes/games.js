@@ -7,11 +7,11 @@ const { connectDB } = require("../db");
 
 router.post("/insert", async (req, res) => {
   const db = await connectDB();
-  const games = db.collection("games");
+  const games = db.collection("games_test");
 
   try {
     // ✅ CHANGED: read file as string and split into lines
-    const filePath = path.join(__dirname, "../data/games_data_1_sample.json");
+    const filePath = path.join(__dirname, "../../../data/games_data_1_sample.json");
     const lines = fs.readFileSync(filePath, "utf8").split("\n");
 
     // ✅ CHANGED: parse each non-empty line as a JSON object
