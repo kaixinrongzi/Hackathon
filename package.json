@@ -20,7 +20,8 @@
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "stream-json": "^1.9.1"
+    "stream-json": "^1.9.1",
+    "cors":"^2.8.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
