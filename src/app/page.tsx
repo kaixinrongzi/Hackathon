@@ -12,7 +12,7 @@ export default function HomePage() {
     setResults([]);
 
     try {
-      const res = await fetch(`http://localhost:3001/games/query?query=${encodeURIComponent(query)}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/games/query?query=${encodeURIComponent(query)}`);
       const data = await res.json();
       setResults(data.results || []);
     } catch (err) {

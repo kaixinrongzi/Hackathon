@@ -8,8 +8,8 @@ import { GoogleGenAI } from "@google/genai";
 
 import StreamChainPkg from "stream-chain";
 const { chain } = StreamChainPkg;
-import ParserPkg from "stream-json/parser.js";
-const { parser } = ParserPkg;
+import StreamJsonPkg from "stream-json";
+const { parser } = StreamJsonPkg;
 import StreamObjectPkg from "stream-json/streamers/StreamObject.js";
 const { streamObject } = StreamObjectPkg;
 
@@ -34,7 +34,7 @@ router.post("/insert", async (req, res) => {
   try {
     const filePath = path.join(__dirname, "../../../data/games.json");
 
-    // === CHANGED: async generator for streaming ===
+    // async generator for streaming
     async function* parseJSONStream(filePath) {
       const pipeline = chain([
         fs.createReadStream(filePath),
@@ -96,11 +96,11 @@ router.post("/insert", async (req, res) => {
         if (batch.length === batchSize) {
           const result = await games.insertMany(batch);
           totalInserted += result.insertedCount;
-          console.log(`✅ Inserted batch of ${result.insertedCount} games`);
+          console.log(`Inserted batch of ${result.insertedCount} games`);
 
           batch = [];
 
-          console.log("⏳ Waiting 1 minute to respect Gemini quota...");
+          console.log("Waiting 1 minute to respect Gemini quota...");
           await sleep(60000);
         }
 
@@ -113,7 +113,7 @@ router.post("/insert", async (req, res) => {
     if (batch.length > 0) {
       const result = await games.insertMany(batch);
       totalInserted += result.insertedCount;
-      console.log(`✅ Inserted final batch of ${result.insertedCount} games`);
+      console.log(`Inserted final batch of ${result.insertedCount} games`);
     }
 
     if (totalInserted === 0) {
@@ -160,7 +160,7 @@ router.get("/query", async (req, res) => {
 
     const queryEmbedding = response.embeddings[0].values;
 
-    // 2. Perform vector similarity search (MongoDB 7.0+ with Atlas Search index)
+    // 2. Perform vector similarity search
     const results = await games.aggregate([
       {
         $vectorSearch: {
@@ -168,7 +168,7 @@ router.get("/query", async (req, res) => {
           path: "embedding",
           numCandidates: 100,
           limit: 5,
-          index: "embedding_index", // This must match your Atlas Search vector index name
+          index: "embedding_index",
         }
       },
       {
