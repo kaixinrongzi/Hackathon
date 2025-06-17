@@ -1,63 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Introduction
+This project is a web-based application that allows users to explore and discover games through **semantic search**. Instead of relying on keyword matching, the system uses **natural language understanding** to return games that are **contextually and semantically similar to user queries**.
 
-## Getting Started
+Users can input free-text descriptions of what they're looking for (e.g., “open-world adventure with strong storyline”), and the system returns a ranked list of games that match the intent, not just the keywords.
 
-First, run the development server:
+## The project Pipeline
+The project pipeline is shown below:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Pipeline Diagram](images/pipeline.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧠 Key Features
+- 🔍 Semantic Search for games based on user descriptions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 💬 Natural Language Embeddings generated from both game descriptions and user queries
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🧭 Vector Space Similarity Search using k-nearest neighbor (k-NN)
 
-## Learn More
+- ⚡ Fast and Scalable Querying over a large dataset
 
-To learn more about Next.js, take a look at the following resources:
+- 🌐 Modern Frontend UI with interactive search and result display
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧱 Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Component         | Technology                | Purpose                                      |
+|-------------------|---------------------------|----------------------------------------------|
+| Frontend          | Next.js (React)           | User interface, server-side rendering, routing |
+| Backend           | Node.js API routes        | Request handling, embedding and DB access   |
+| Embedding Service | Gemini API (text-embedding-004) | Generate 768-dimension semantic embeddings  |
+| Database & Search | MongoDB Atlas with Vector Search | Stores game metadata and embeddings, performs similarity search |
 
-## Deploy on Vercel
+## ⚙️ How It Works (Summary Flow)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. A user enters a natural language query.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. The query is passed to Gemini's `text-embedding-004` to produce an embedding vector.
 
-## Running the Server (Backend)
-1. Ensure you have all necessary the packages
-    ```
-    npm install
-    ```
-2. Start the Server
-    ```bash
-    # start backend only
-    npm run dev_backend
+3. This vector is used to query MongoDB Atlas Vector Search, which returns the most semantically similar game entries.
 
-    # start both front and backend
-    npm run dev
-    ```
-    The Server will be running on ```port 3001```
-3. Send request to server
-    - Send using Postman
-    - Send using ```curl```
-        ```bash
-        # Example
-        curl.exe -X POST http://localhost:3001/games/insert
-        ```
-    Request that server accept:
-    - insert: insert all data in games_data_1_sample.json.json file into MongoDB
-    - query (TODO): vector search of related games base on user query from front end and return the search result to front end
-    
-
+4. The results are returned to the frontend and displayed in a user-friendly interface.
