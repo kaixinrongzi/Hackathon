@@ -33,7 +33,7 @@ export default function HomePage() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="e.g. open world survival with crafting..."
+            placeholder="e.g. cooking simulation game"
             className="flex-1 px-4 py-2 border rounded shadow-sm focus:ring-2 focus:ring-sky-500 focus:outline-none"
           />
           <button
@@ -76,7 +76,7 @@ export default function HomePage() {
         )}
 
         {results.length === 0 && !loading && (
-          <p className="text-gray-400 mt-8">No results yet. Try searching something like "zombie survival game".</p>
+          <p className="text-gray-400 mt-8">No results yet.</p>
         )}
       </div>
     </main>
